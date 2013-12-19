@@ -1,0 +1,42 @@
+﻿<div id="projectid" data-name="@ViewData["projectid"]"></div>
+<section id="postsContainer" >
+    <div id="posts">
+    </div>
+</section>
+
+<script id="postsTemplate" type="text/x-jQuery-tmpl">
+    {{each postsList}}{{tmpl($value) "#postTemplate"}}{{/each}}
+</script>
+
+<script id="postTemplate" type="text/x-jQuery-tmpl">
+    <div class="post">
+        <a class="text" href="${UrlToPost}" target="_blank">${Text}
+        </a>
+        <div class="identity">
+            <div class="avatar">
+                <a href="${UrlToUserProfile}">
+                    <img src="${UrlToUserAvatar}" />
+                </a>
+            </div>
+            <div class="names">
+                <a class="name" href="${UrlToUserProfile}" target="_blank">${Name}</a>
+                <br />
+                {{if SourceService === 'twitter'}}
+                <a class="screenName" href="${UrlToUserProfile}" target="_blank">@@${ScreenName.toLowerCase()} (${FollowersCount})</a>
+                <br />
+                {{/if}}
+                <a class="time" href="${UrlToPost}" target="_blank">${getPostTimeText(DateCreated)}</a>
+            </div>
+            <img class="sourceService" src="${(SourceService === 'twitter') ? '/images/twitter.png' : '/images/googleplus.png'}" />
+        </div>
+    </div>
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43130700-1', 'roomdash.com');
+  ga('send', 'pageview');
+</script>

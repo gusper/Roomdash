@@ -1,0 +1,240 @@
+﻿html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #eee;
+    color: #333;
+    font-size: .95em;
+    font-family: 'Segoe UI', 'Myriad Pro', Sans-Serif;
+    margin: 0;
+    padding: 0;
+}
+
+a, a:link, a:visited, a:active, a:hover {
+    outline: none;
+    text-decoration: underline;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+/* site header -------------------------------------------*/
+
+header, footer, hgroup, nav, section {
+    background-color: #007acc;
+}
+
+header {
+    display: inline-block;
+    width: 100%;
+    position: fixed;
+    z-index: 5000;
+    font-size: 1.8em;
+    box-shadow: 1px 1px 10px #aaa;
+    padding: 0 15px;
+    margin: 0;
+    top: 0;
+}
+
+#site-title {
+    color: #fff;
+    font-family: 'Segoe UI Light', 'Segoe UI', sans-serif;
+    font-weight: lighter;
+}
+
+    #site-title a, #site-title a:hover, #site-title a:active {
+        color: #fff;
+        text-decoration: none;
+    }
+
+#stats {
+    float: right;
+    font-size: 0.8em;
+    padding-top: 3px;
+    margin-right: 30px;
+}
+
+footer {
+    display: inline-block;
+    width: 100%;
+    background-color: #007acc;
+    color: #fff;
+    font-size: 1em;
+    margin: 0;
+    bottom: 0;
+    box-shadow: -1px -1px 10px #aaa;
+    position: fixed;
+    z-index: 5000;
+}
+
+    footer span {
+        padding: 3px 15px;
+    }
+
+    footer footer a, footer a:hover, footer a:active, footer a:visited, footer a:link {
+        color: #fff;
+        text-decoration: none;
+    }
+
+#credits {
+    float: left;
+    padding: 3px 15px;
+}
+
+#last-refresh {
+    float: right;
+}
+/* posts ------------------------------------------------*/
+
+#postsContainer {
+    background-color: #eee;
+    clear: both;
+    margin-top: 41px;
+}
+
+#posts {
+    font-size: 1em;
+    padding: 10px 0 0 10px;
+}
+
+.post {
+    background: #f7f7f7;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    vertical-align: top;
+    width: 340px;
+    padding: 10px 10px 0 10px;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 0 15px #ccc;
+}
+
+    .post .avatar {
+        float: left;
+        padding: 5px 5px 5px 0;
+    }
+
+        .post .avatar img {
+            border-radius: 25px;
+            border-style: none;
+            width: 48px;
+            height: 48px;
+        }
+
+    .post .identity {
+        background: #ddd;
+        margin-top: 10px;
+    }
+
+    .post .names {
+        float: left;
+        font-size: 1.1em;
+        padding: 3px 5px 5px 2px;
+        line-height: 100%;
+    }
+
+    .post .name {
+        color: #333;
+        font-weight: bold;
+        padding: 0;
+        text-decoration: none;
+    }
+
+    .post .screenName {
+        color: #222;
+        text-decoration: none;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .post .text {
+        clear: left;
+        color: #222;
+        font-size: 1.4em;
+        text-decoration: none;
+        word-wrap: break-word;
+        font-family: 'Calibri', 'Segoe UI', sans-serif;
+    }
+
+    .post .time {
+        color: #777;
+        text-decoration: none;
+        font-size: 0.75em;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .post .sourceService {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        margin: 10px;
+        border-radius: 25px;
+        border-style: none;
+        width: 25px;
+        height: 25px;
+        opacity: 0.3;
+    }
+
+/* Handle common maximized resolutions */
+
+@media (min-width: 2550px) {
+    .post {
+        width: 470px;
+    }
+}
+
+
+/********************
+*   Mobile Styles   *
+********************/
+
+@media (max-width: 690px) {
+
+    html {
+        width: 100%;
+    }
+
+    body {
+        width: 100%;
+        font-size: .65em;
+    }
+
+    #postsContainer {
+        width: 100%;
+    }
+
+    #posts {
+        margin: 0 auto;
+        padding: 10px 0 10px 10px;
+    }
+
+    footer .float-left,
+    footer .float-right {
+        float: none;
+    }
+
+    footer p {
+        font-size: 1em;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@media (min-width: 460px) and (max-width: 690px) {
+    .post {
+        width: 410px;
+    }
+}
+
+@media (max-width: 459px) {
+    .post {
+        width: 230px;
+    }
+}

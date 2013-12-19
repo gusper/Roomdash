@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="900">
+    <title>Roomdash</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <header id="site-title">
+        <span>@Html.ActionLink("ROOMDASH", "Index", "Home")</span>
+        <span id="stats" />
+    </header>
+    @RenderBody()
+    <footer>
+        <span id="credits">More info: <a href="http://twitter.com/gusper">@@gusper</a></span>
+        <span id="last-refresh">As of @DateTime.Now.ToShortTimeString() on @DateTime.Now.ToShortDateString()</span>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery", "~/bundles/jquery-tmpl", "~/bundles/masonry", "~/bundles/main")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
