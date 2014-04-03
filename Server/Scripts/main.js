@@ -11,7 +11,9 @@ loadPosts();
 function loadPosts() {
     projectId = $('#projectid').data("name");
     $.getJSON(apiUrl + projectId).done(function (data) {
-        postsList = data;
+        postsList = data.filter(function (obj) {
+            return obj.ScreenName != "BriansWebWorks" // temp hack to make the team happy 
+        });
         calculateStats();
         if (domReady) displayPageContent();
     });
