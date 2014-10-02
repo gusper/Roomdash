@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO.Compression;
+using System.IO;
 using Engine.Models;
 using Newtonsoft.Json.Linq;
 
@@ -16,38 +18,58 @@ namespace Engine
 
         public List<Post> GetPosts(string topic)
         {
-            var query = "https://api.stackexchange.com/2.2/search?key=O3l2QcPi)Uvsohl4ojAKcA((&order=desc&sort=creation&tagged=internet-explorer&intitle=F12&site=stackoverflow";
-            JArray searchResults;
-            string json;
+            List<Post> posts = new List<Post>();
+            var query = GetQueryTextForTopic(topic);
+
+            var searchResults = getQueryResults(query);
+
+            foreach(var status in  searchResults["items"])
+            {
+                //Convert Unix timestamp to DateTime
+                var time = (double)status["creation_date"];
+                System.DateTime dt = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+                dt = dt.AddSeconds(time);
+
+                Post p = new Post(){
+                    ScreenName = (string)status["owner"]["display_name"],
+                    Name = (string)status["owner"]["display_name"],
+                    FollowersCount = (int)status["owner"]["reputation"],
+                    UrlToPost = (string)status["link"],
+                    UrlToUserProfile = (string)status["owner"]["link"],
+                    UrlToUserAvatar = (string)status["owner"]["profile_image"],
+                    DateCreated = dt,
+                    SourceService = "StackOverflow",
+                    Text = (string)status["title"]
+                };
+                posts.Add(p);
+            };
+            return posts;
+        }
+
+
+        private JObject getQueryResults(string query)
+        {
+            var posts = new List<Post>();
+            System.String json = string.Empty;
+
             using (var w = new WebClient())
             {
                 try
                 {
-                    json = w.DownloadString(query);
-                }
-                catch (Exception)
-                {
-                    return new List<Post>();
-                }
-            }
-            searchResults = JArray.Parse(json);
+                    var client = new WebClient();
+                    var responseStream = new GZipStream(client.OpenRead(query), CompressionMode.Decompress);
+                    var reader = new StreamReader(responseStream);
+                    json = reader.ReadToEnd();
 
-            return searchResults.Select(status => new Post()
-            {
-                ScreenName = (string)status["owner"]["display_name"],
-                Name = (string)status["owner"]["display_name"],
-                FollowersCount = (int)status["owner"]["reputation"],
-                UrlToPost = (string)status["link"],
-                UrlToUserProfile = (string)status["owner"]["link"],
-                UrlToUserAvatar = (string)status["owner"]["profile_image"],
-                DateCreated = (System.DateTime)status["creation_date"],
-                SourceService = "StackOverflow",
-                Text = (string)status["title"]
-            }).ToList();
+                }
+                catch (Exception) { }
+            }
+           return JObject.Parse(json);
         }
 
         private string GetQueryTextForTopic(string topic)
         {
+            var query = "https://api.stackexchange.com/2.2/search?key=O3l2QcPi)Uvsohl4ojAKcA((&order=desc&sort=creation&tagged=internet-explorer&intitle=F12&site=stackoverflow";
             string queryText = string.Empty;
 
             switch (topic)
@@ -87,7 +109,7 @@ namespace Engine
                     break;
             }
 
-            return queryText;
+            return query;
         }
     }
 }
