@@ -24,6 +24,9 @@
                 {{if SourceService === 'twitter'}}
                 <a class="screenName" href="${UrlToUserProfile}" target="_blank">@@${ScreenName.toLowerCase()} (${FollowersCount})</a>
                 <br />
+                {{else (SourceService === 'stackoverflow')}}
+                <a class="screenName" href="${UrlToUserProfile}" target="_blank">(${FollowersCount})</a>
+                <br />
                 {{/if}}
                 <a class="time" href="${UrlToPost}" target="_blank">${getPostTimeText(DateCreated)}</a>
             </div>

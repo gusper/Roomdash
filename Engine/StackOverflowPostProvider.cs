@@ -29,16 +29,21 @@ namespace Engine
                 var time = (double)status["creation_date"];
                 System.DateTime dt = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
                 dt = dt.AddSeconds(time);
-
+                var s = status;
                 Post p = new Post(){
                     ScreenName = (string)status["owner"]["display_name"],
                     Name = (string)status["owner"]["display_name"],
                     FollowersCount = (int)status["owner"]["reputation"],
+                    ID = status["owner"]["reputation"] + "/" +
+                    (status["owner"].Contains(new JRaw("badges_count"))?
+                     status["owner"]["badge_counts"]["bronze"] + "/"
+                    + status["owner"]["badge_counts"]["silver"] + "/"
+                    + status["owner"]["badge_counts"]["gold"] : "0/0/0"),
                     UrlToPost = (string)status["link"],
                     UrlToUserProfile = (string)status["owner"]["link"],
                     UrlToUserAvatar = (string)status["owner"]["profile_image"],
                     DateCreated = dt,
-                    SourceService = "StackOverflow",
+                    SourceService = "stackoverflow",
                     Text = (string)status["title"]
                 };
                 posts.Add(p);
@@ -130,7 +135,10 @@ namespace Engine
                 (tagged.Equals(string.Empty) ? string.Empty : "&tagged=" + tagged) +
                 (intitle.Equals(string.Empty) ? string.Empty : "&intitle=" + intitle) +
                 (nottagged.Equals(string.Empty) ? string.Empty : "&nottagged=" + nottagged) +
-                "&site=stackoverflow";
+                "&site=stackoverflow"+
+                "&filter=!9YdnSCK0n";
+            //https://api.stackexchange.com/docs/search#order=desc&sort=activity&tagged=%5Binternet-explorer%5D&intitle=F12&filter=!9YdnSCK0n&site=stackoverflow&run=true
+            //See above for filter details. 
         }
     }
 }
