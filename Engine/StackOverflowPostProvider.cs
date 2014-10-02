@@ -69,47 +69,68 @@ namespace Engine
 
         private string GetQueryTextForTopic(string topic)
         {
-            var query = "https://api.stackexchange.com/2.2/search?key=O3l2QcPi)Uvsohl4ojAKcA((&order=desc&sort=creation&tagged=internet-explorer&intitle=F12&site=stackoverflow";
-            string queryText = string.Empty;
+            string tagged = string.Empty;
+            string intitle = string.Empty;
+            var nottagged = string.Empty;
 
             switch (topic)
             {
+                    // query params chosen for what seemed to get the most hits. 
+                    // tagged accepts OR in the form of tag;tag;tag
+                    // intitle does not accept OR, all words must be present.
+                    // nottagged filters out all posts with the provided tags.  Uses tag;tag;tag as OR.
+
                 case "f12": // F12
-                    queryText = @"f12 OR tools OR debugging IE10 OR IE11 OR ""IE 11"" OR ""Internet Explorer""";
+                    tagged = "internet-explorer";
+                    intitle = "F12";//@"f12 OR tools OR debugging IE10 OR IE11 OR ""IE 11"" OR ""Internet Explorer""";
                     break;
                 case "alt": // ALT
-                    queryText = @"""Visual Studio"" ultimate OR debug OR lens OR sense OR map OR profiler OR intellitrace OR devops OR progression OR hub OR ""unit tests""";
+                    tagged = "visual-studio"; //@"""Visual Studio"" ultimate OR debug OR lens OR sense OR map OR profiler OR intellitrace OR devops OR progression OR hub OR ""unit tests""";
+                    intitle = "debug";
                     break;
                 case "xdt": // Xaml Design Tools
-                    queryText = @"blend ""Visual Studio"" OR xaml OR microsoft OR unnir";
+                    tagged = "visual-studio"; //@"blend ""Visual Studio"" OR xaml OR microsoft OR unnir";
+                    intitle = "xaml";
                     break;
                 case "hdt": // Html Design Tools
-                    queryText = @"blend ""Visual Studio"" OR html OR microsoft";
+                    tagged = "visual-studio"; //@"blend ""Visual Studio"" OR html OR microsoft";
+                    intitle = "blend";
                     break;
                 case "chakra": // Chakra runtime
-                    queryText = @"javascript chakra OR v8 OR ""Internet Explorer"" OR IE10 OR IE11 OR carakan OR tamarin OR monkey OR nitro OR jsrt";
+                    tagged = "internet-explorer"; //@"javascript chakra OR v8 OR ""Internet Explorer"" OR IE10 OR IE11 OR carakan OR tamarin OR monkey OR nitro OR jsrt";
+                    intitle = "chakra";
                     break;
                 case "jstools": // JavaScript tools
-                    queryText = @"""Visual Studio"" javascript OR js";
+                    tagged = "visual-studio"; // @"""Visual Studio"" javascript OR js";
+                    intitle = "javascript";
                     break;
                 case "typescript": // TypeScript
-                    queryText = @"typescript";
+                    tagged = "typescript";
                     break;
                 case "cat": // CAT team
-                    queryText = @"""Visual Studio"" azure OR packaging OR store OR phone OR emulator OR manifest OR publish";
+                    tagged = "visual-studio";// azure OR packaging OR store OR phone OR emulator OR manifest OR publish";
+                    intitle = "azure";
                     break;
                 case "visualstudio": // Visual Studio
-                    queryText = @"""Visual Studio"" OR VS2012 OR VS2013";
+                    tagged = "visual-studio;visual-studio-2013;visual-studio-2012"; //@"""Visual Studio"" OR VS2012 OR VS2013";
                     break;
                 case "appinsights": // Application Insights
-                    queryText = @"""application insights"" OR ""app insights""";
+                    intitle = "app insights";   //@"""application insights"" OR ""app insights""";
+                    nottagged = "facebook";
                     break;
                 case "fiddler": // Fiddler 
-                    queryText = @"fiddler browser OR network OR IE OR Chrome OR web OR request OR Firefox OR port OR mono OR mac OR xamarin OR telerik";
+                    intitle = "fiddler";//@"fiddler browser OR network OR IE OR Chrome OR web OR request OR Firefox OR port OR mono OR mac OR xamarin OR telerik";
                     break;
             }
-
-            return query;
+          return "https://api.stackexchange.com/2.2/search?" +
+                "key=" + Engine.Secrets.ApiKeys.StackOverflowAccessToken +
+                "&pagesize=20" +
+                "&order=desc" +
+                "&sort=creation" +
+                (tagged.Equals(string.Empty) ? string.Empty : "&tagged=" + tagged) +
+                (intitle.Equals(string.Empty) ? string.Empty : "&intitle=" + intitle) +
+                (nottagged.Equals(string.Empty) ? string.Empty : "&nottagged=" + nottagged) +
+                "&site=stackoverflow";
         }
     }
 }
