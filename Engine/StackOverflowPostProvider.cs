@@ -165,9 +165,9 @@ namespace Engine
             var gold = split[3];
 
             return @"(<b>"+rep+"</b>) " +               // Hacky insertion of numbers to make spans into circles. 
-                (bronze.Equals("0") ? string.Empty : bronze + @"<span class=""badge bronze"">&nbsp;7&nbsp;&nbsp;</span> ") +
-                (silver.Equals("0") ? string.Empty : silver + @"<span class=""badge silver"">&nbsp;2&nbsp;&nbsp;</span> ") +
-                (gold.Equals("0") ? string.Empty : gold + @"<span class=""badge gold"">&nbsp;&nbsp;1&nbsp;</span>");
+                (bronze.Equals("0") ? string.Empty : bronze + @"<span class=""badge bronze""></span>") +
+                (silver.Equals("0") ? string.Empty : silver + @"<span class=""badge silver""></span>") +
+                (gold.Equals("0") ? string.Empty : gold + @"<span class=""badge gold""></span>");
         }
 
     }
