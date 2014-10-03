@@ -152,6 +152,7 @@ footer {
         text-decoration: none;
         padding: 0;
         font-family: 'Segoe UI', sans-serif;
+        line-height: 23px;
     }
 
     .post .text {
@@ -237,4 +238,30 @@ footer {
     .post {
         width: 230px;
     }
+}
+
+/************************
+* Stack Overflow Badges *
+************************/
+.badge {
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    border: 0.5px solid #000;    
+    opacity: 0.3;
+}
+
+.gold{
+    background-color: #ffcc00;
+    color: #ffcc00;
+}
+
+.silver{
+    background-color: #c5c5c5;
+    color: #c5c5c5;
+}
+
+.bronze{
+    background-color: #cc9966;
+    color: #cc9966;
 }

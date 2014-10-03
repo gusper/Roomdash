@@ -3,7 +3,6 @@ using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO.Compression;
 using System.IO;
 using Engine.Models;
@@ -29,16 +28,14 @@ namespace Engine
                 var time = (double)status["creation_date"];
                 System.DateTime dt = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
                 dt = dt.AddSeconds(time);
-                var s = status;
+
+                var id = getSubtitle(status);
+
                 Post p = new Post(){
                     ScreenName = (string)status["owner"]["display_name"],
                     Name = (string)status["owner"]["display_name"],
                     FollowersCount = (int)status["owner"]["reputation"],
-                    ID = status["owner"]["reputation"] + "/" +
-                    (status["owner"].Contains(new JRaw("badges_count"))?
-                     status["owner"]["badge_counts"]["bronze"] + "/"
-                    + status["owner"]["badge_counts"]["silver"] + "/"
-                    + status["owner"]["badge_counts"]["gold"] : "0/0/0"),
+                    ID = id,
                     UrlToPost = (string)status["link"],
                     UrlToUserProfile = (string)status["owner"]["link"],
                     UrlToUserAvatar = (string)status["owner"]["profile_image"],
@@ -140,5 +137,34 @@ namespace Engine
             //https://api.stackexchange.com/docs/search#order=desc&sort=activity&tagged=%5Binternet-explorer%5D&intitle=F12&filter=!9YdnSCK0n&site=stackoverflow&run=true
             //See above for filter details. 
         }
+
+        // Creates the formatted reputation and badge display for SO posts. 
+        public string getSubtitle(JToken status)
+        {
+            var ID = status["owner"]["reputation"] + "/";
+            try
+            {
+                ID = ID +    //SO doesn't always include the badges count, and doing LINQ null checks sucks. 
+                         status["owner"]["badge_counts"]["bronze"] + "/"
+                        + status["owner"]["badge_counts"]["silver"] + "/"
+                        + status["owner"]["badge_counts"]["gold"];
+            }
+            catch (Exception)
+            {
+                ID = ID + "0/0/0";
+            }
+            var split = ID.Split('/');
+            var rep = split[0];
+            if(int.Parse(rep)>1000) rep = rep.Substring(0,rep.Length-3) + "." + rep.Substring(rep.Length-3,1) + "k";
+            var bronze = split[1];
+            var silver = split[2];
+            var gold = split[3];
+
+            return @"(<b>"+rep+"</b>) " +
+                (bronze.Equals("0") ? string.Empty : bronze + @"<span class=""badge bronze"">&nbsp;7&nbsp;&nbsp;</span> ") +
+                (silver.Equals("0") ? string.Empty : silver + @"<span class=""badge silver"">&nbsp;2&nbsp;&nbsp;</span> ") +
+                (gold.Equals("0") ? string.Empty : gold + @"<span class=""badge gold"">&nbsp;&nbsp;1&nbsp;</span>");
+        }
+
     }
 }

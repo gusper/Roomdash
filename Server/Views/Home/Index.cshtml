@@ -25,7 +25,7 @@
                 <a class="screenName" href="${UrlToUserProfile}" target="_blank">@@${ScreenName.toLowerCase()} (${FollowersCount})</a>
                 <br />
                 {{else (SourceService === 'stackoverflow')}}
-                <a class="screenName" href="${UrlToUserProfile}" target="_blank">(${FollowersCount})</a>
+                <a class="screenName" href="${UrlToUserProfile}" target="_blank"> {{html ID}} </a>
                 <br />
                 {{/if}}
                 <a class="time" href="${UrlToPost}" target="_blank">${getPostTimeText(DateCreated)}</a>
