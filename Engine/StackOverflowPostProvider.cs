@@ -21,6 +21,8 @@ namespace Engine
             var query = GetQueryTextForTopic(topic);
 
             var searchResults = getQueryResults(query);
+            
+            if (searchResults == null) return posts;
 
             foreach(var status in  searchResults["items"])
             {
@@ -51,8 +53,8 @@ namespace Engine
 
         private JObject getQueryResults(string query)
         {
-            var posts = new List<Post>();
-            System.String json = string.Empty;
+            string json = string.Empty;
+            JObject posts = null;
 
             using (var w = new WebClient())
             {
@@ -62,18 +64,18 @@ namespace Engine
                     var responseStream = new GZipStream(client.OpenRead(query), CompressionMode.Decompress);
                     var reader = new StreamReader(responseStream);
                     json = reader.ReadToEnd();
-
+                    posts = JObject.Parse(json);
                 }
-                catch (Exception) { }
+                catch (Exception) { return null; }
             }
-           return JObject.Parse(json);
+            return posts;
         }
 
         private string GetQueryTextForTopic(string topic)
         {
             string tagged = string.Empty;
             string intitle = string.Empty;
-            var nottagged = string.Empty;
+            string nottagged = string.Empty;
 
             switch (topic)
             {
@@ -126,7 +128,7 @@ namespace Engine
             }
           return "https://api.stackexchange.com/2.2/search?" +
                 "key=" + Engine.Secrets.ApiKeys.StackOverflowAccessToken +
-                "&pagesize=20" +
+                "&pagesize=20" +    // Only show last 20 posts. Should be plenty. 
                 "&order=desc" +
                 "&sort=creation" +
                 (tagged.Equals(string.Empty) ? string.Empty : "&tagged=" + tagged) +
@@ -151,16 +153,18 @@ namespace Engine
             }
             catch (Exception)
             {
+                //Catch all to show no badges. Is not displayed. 
                 ID = ID + "0/0/0";
             }
             var split = ID.Split('/');
             var rep = split[0];
+            //Reduce big numbers into xxx.xk.  Only a 1-2 char reduction, but follows SO format. 
             if(int.Parse(rep)>1000) rep = rep.Substring(0,rep.Length-3) + "." + rep.Substring(rep.Length-3,1) + "k";
             var bronze = split[1];
             var silver = split[2];
             var gold = split[3];
 
-            return @"(<b>"+rep+"</b>) " +
+            return @"(<b>"+rep+"</b>) " +               // Hacky insertion of numbers to make spans into circles. 
                 (bronze.Equals("0") ? string.Empty : bronze + @"<span class=""badge bronze"">&nbsp;7&nbsp;&nbsp;</span> ") +
                 (silver.Equals("0") ? string.Empty : silver + @"<span class=""badge silver"">&nbsp;2&nbsp;&nbsp;</span> ") +
                 (gold.Equals("0") ? string.Empty : gold + @"<span class=""badge gold"">&nbsp;&nbsp;1&nbsp;</span>");
