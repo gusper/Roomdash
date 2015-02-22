@@ -24,10 +24,13 @@
                 {{if SourceService === 'twitter'}}
                 <a class="screenName" href="${UrlToUserProfile}" target="_blank">@@${ScreenName.toLowerCase()} (${FollowersCount})</a>
                 <br />
+                {{else (SourceService === 'stackoverflow')}}
+                <a class="screenName" href="${UrlToUserProfile}" target="_blank"> {{html ID}} </a>
+                <br />
                 {{/if}}
                 <a class="time" href="${UrlToPost}" target="_blank">${getPostTimeText(DateCreated)}</a>
             </div>
-            <img class="sourceService" src="${(SourceService === 'twitter') ? '/images/twitter.png' : '/images/googleplus.png'}" />
+            <img class="sourceService" src="${'/images/'+SourceService+'.png'}" />
         </div>
     </div>
 </script>
