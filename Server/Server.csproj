@@ -154,6 +154,7 @@
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.1\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -287,6 +288,7 @@
     <None Include="Properties\PublishProfiles\roomdash.com - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\roomdash.com - Web Deploy.pubxml" />
     <Content Include="Images\googleplus.png" />
+    <Content Include="Images\stackoverflow.png" />
     <Content Include="Images\twitter.png" />
     <Content Include="Scripts\dateutils.js" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />

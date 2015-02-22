@@ -101,6 +101,7 @@
     <Compile Include="Models\Post.cs" />
     <Compile Include="PostsManager.cs" />
     <Compile Include="Secrets\ApiKeys.cs" />
+    <Compile Include="StackOverflowPostProvider.cs" />
     <Compile Include="TwitterPostProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

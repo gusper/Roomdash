@@ -16,6 +16,7 @@ namespace Engine
             _postProviders.Add(new TwitterPostProvider());
             _postProviders.Add(new GooglePlusPostProvider());
             _postProviders.Add(new StackOverflowPostProvider());
+            
             foreach (var provider in _postProviders)
             {
                 provider.Connect();
