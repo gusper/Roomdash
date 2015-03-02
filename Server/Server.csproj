@@ -290,7 +290,7 @@
     <Content Include="Images\googleplus.png" />
     <Content Include="Images\stackoverflow.png" />
     <Content Include="Images\twitter.png" />
-    <Content Include="Scripts\dateutils.js" />
+    <Content Include="FrontEnd\dateutils.js" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
@@ -308,7 +308,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.1.0.debug.js" />
     <Content Include="Scripts\knockout-3.1.0.js" />
-    <Content Include="Scripts\main.js" />
+    <Content Include="FrontEnd\main.js" />
     <Content Include="Scripts\masonry.pkgd.js" />
     <Content Include="Scripts\masonry.pkgd.min.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
@@ -321,7 +321,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
+    <Content Include="FrontEnd\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

@@ -9,7 +9,7 @@ namespace Server
         public static void RegisterBundles(BundleCollection bundles)
         {
             var mainBundle = new ScriptBundle("~/bundles/main").Include(
-                "~/Scripts/dateutils.js", "~/Scripts/main.js");
+                "~/frontend/dateutils.js", "~/frontend/main.js");
             mainBundle.Transforms.Add(new JsMinify());
             bundles.Add(mainBundle);
 
@@ -22,7 +22,8 @@ namespace Server
             bundles.Add(new ScriptBundle("~/bundles/masonry").Include(
                 "~/Scripts/masonry.pkgd*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/frontend/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/themes/base/jquery.ui.core.css",
