@@ -123,6 +123,9 @@ namespace Engine
                 case "fiddler": // Fiddler 
                     intitle = "fiddler";
                     break;
+                case "dev14": // Visual Studio 2015 (Dev14)
+                    tagged = @"visual-studio-2015";
+                    break;
             }
             return "https://api.stackexchange.com/2.2/search?" +
                   "key=" + Engine.Secrets.ApiKeys.StackOverflowAccessToken +

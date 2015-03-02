@@ -93,6 +93,9 @@ namespace Engine
                 case "fiddler": // Fiddler 
                     queryText = @"fiddler browser OR network OR IE OR Chrome OR web OR request OR Firefox OR port OR mono OR mac OR xamarin OR telerik";
                     break;
+                case "dev14": // Visual Studio 2015 (Dev14)
+                    queryText = @"""visual studio"" OR vs AND 2015 ctp";
+                    break;
             }
 
             queryText += " exclude:retweets";
