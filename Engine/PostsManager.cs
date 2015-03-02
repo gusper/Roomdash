@@ -10,8 +10,14 @@ namespace Engine
     public class PostsManager
     {
         private readonly List<IPostProvider> _postProviders = new List<IPostProvider>();
+        private List<ProjectModel> _projects;
 
-        public void Initialize()
+        public PostsManager(List<ProjectModel> projectList)
+        {
+            _projects = projectList;
+        }
+
+        private void Initialize(string project)
         {
             _postProviders.Add(new TwitterPostProvider());
             _postProviders.Add(new GooglePlusPostProvider());
@@ -27,6 +33,7 @@ namespace Engine
         {
             var posts = new List<Post>();
 
+            Initialize(project);
             foreach (var providerList in _postProviders)
                 posts.AddRange(providerList.GetPosts(project));
 
