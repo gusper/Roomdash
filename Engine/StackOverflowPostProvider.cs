@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO.Compression;
 using System.IO;
 using Engine.Models;
@@ -14,10 +12,10 @@ namespace Engine
     {
         public void Connect() { }
 
-        public List<Post> GetPosts(string topic)
+        public List<Post> GetPosts(ProjectModel requestedProject)
         {
             List<Post> posts = new List<Post>();
-            var query = GetQueryTextForTopic(topic);
+            var query = GetQueryTextForTopic(requestedProject);
             var searchResults = getQueryResults(query);
             if (searchResults == null) return posts;
 
@@ -69,72 +67,20 @@ namespace Engine
             return posts;
         }
 
-        private string GetQueryTextForTopic(string topic)
+        private string GetQueryTextForTopic(ProjectModel project)
         {
             string tagged = string.Empty;
             string intitle = string.Empty;
             string nottagged = string.Empty;
 
-            switch (topic)
-            {
-                // query params chosen for what seemed to get the most hits. 
-                // tagged accepts OR in the form of tag;tag;tag
-                // intitle does not accept OR, all words must be present.
-                // nottagged filters out all posts with the provided tags.  Uses tag;tag;tag as OR.
-
-                case "f12": // F12
-                    tagged = "internet-explorer";
-                    intitle = "F12";
-                    break;
-                case "alt": // ALT
-                    tagged = "visual-studio;visual-studio-2013;visual-studio-2012;visual-studio-2015"; 
-                    intitle = "debug";
-                    break;
-                case "xdt": // Xaml Design Tools
-                    tagged = "visual-studio"; 
-                    intitle = "xaml";
-                    break;
-                case "hdt": // Html Design Tools
-                    tagged = "visual-studio"; 
-                    intitle = "blend";
-                    break;
-                case "chakra": // Chakra runtime
-                    tagged = "internet-explorer"; 
-                    intitle = "chakra";
-                    break;
-                case "jstools": // JavaScript tools
-                    tagged = "visual-studio"; 
-                    intitle = "javascript";
-                    break;
-                case "typescript": // TypeScript
-                    tagged = "typescript";
-                    break;
-                case "cat": // CAT team
-                    tagged = "visual-studio";
-                    intitle = "azure";
-                    break;
-                case "visualstudio": // Visual Studio
-                    tagged = "visual-studio;visual-studio-2013;visual-studio-2012;visual-studio-2015";
-                    break;
-                case "appinsights": // Application Insights
-                    intitle = "app insights";
-                    nottagged = "facebook";
-                    break;
-                case "fiddler": // Fiddler 
-                    intitle = "fiddler";
-                    break;
-                case "dev14": // Visual Studio 2015 (Dev14)
-                    tagged = @"visual-studio-2015";
-                    break;
-            }
             return "https://api.stackexchange.com/2.2/search?" +
                   "key=" + Engine.Secrets.ApiKeys.StackOverflowAccessToken +
                   "&pagesize=20" +    // Only show last 20 posts. Should be plenty. 
                   "&order=desc" +
                   "&sort=creation" +
-                  (tagged.Equals(string.Empty) ? string.Empty : "&tagged=" + tagged) +
-                  (intitle.Equals(string.Empty) ? string.Empty : "&intitle=" + intitle) +
-                  (nottagged.Equals(string.Empty) ? string.Empty : "&nottagged=" + nottagged) +
+                  (project.StackOverflowTagged.Equals(string.Empty) ? string.Empty : "&tagged=" + project.StackOverflowTagged) +
+                  (project.StackOverflowInTitle.Equals(string.Empty) ? string.Empty : "&intitle=" + project.StackOverflowInTitle) +
+                  (project.StackOverflowNotTagged.Equals(string.Empty) ? string.Empty : "&nottagged=" + project.StackOverflowNotTagged) +
                   "&site=stackoverflow" +
                   "&filter=!9YdnSCK0n";
             // https://api.stackexchange.com/docs/search#order=desc&sort=activity&tagged=%5Binternet-explorer%5D&intitle=F12&filter=!9YdnSCK0n&site=stackoverflow&run=true

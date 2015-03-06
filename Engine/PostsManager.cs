@@ -17,7 +17,7 @@ namespace Engine
             _projects = projectList;
         }
 
-        private void Initialize(string project)
+        private void Initialize()
         {
             _postProviders.Add(new TwitterPostProvider());
             _postProviders.Add(new GooglePlusPostProvider());
@@ -29,13 +29,16 @@ namespace Engine
             }
         }
 
-        public IEnumerable<Post> GetPosts(string project)
+        public IEnumerable<Post> GetPosts(string requestedProjectName)
         {
             var posts = new List<Post>();
 
-            Initialize(project);
+            Initialize();
+
+            var requestedProject = _projects.Find(p => p.UrlSlug.ToLower() == requestedProjectName.ToLower());
+
             foreach (var providerList in _postProviders)
-                posts.AddRange(providerList.GetPosts(project));
+                posts.AddRange(providerList.GetPosts(requestedProject));
 
             return from post in posts
                    orderby post.DateCreated descending
