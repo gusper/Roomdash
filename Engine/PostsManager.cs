@@ -9,7 +9,7 @@ namespace Engine
 {
     public class PostsManager
     {
-        private readonly List<IPostProvider> _postProviders = new List<IPostProvider>();
+        private List<IPostProvider> _postProviders;
         private List<ProjectModel> _projects;
 
         public PostsManager(List<ProjectModel> projectList)
@@ -19,9 +19,12 @@ namespace Engine
 
         private void Initialize()
         {
-            _postProviders.Add(new TwitterPostProvider());
-            _postProviders.Add(new GooglePlusPostProvider());
-            _postProviders.Add(new StackOverflowPostProvider());
+            _postProviders = new List<IPostProvider>()
+            {
+                new TwitterPostProvider(),
+                new GooglePlusPostProvider(),
+                new StackOverflowPostProvider(),
+            };
             
             foreach (var provider in _postProviders)
             {
