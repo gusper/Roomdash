@@ -17,13 +17,13 @@ namespace Engine
             Authenticate();
         }
 
-        public List<Post> GetPosts(ProjectModel requestedProject)
+        public List<Post> GetPosts(TopicModel requestedTopic)
         {
             List<Post> fullResults = new List<Post>();
             ActivitiesResource.SearchRequest searchRequest;
             string pageToken = string.Empty;
             
-            searchRequest = _plusService.Activities.Search(requestedProject.GooglePlusQuery);
+            searchRequest = _plusService.Activities.Search(requestedTopic.GooglePlusQuery);
           
             while (fullResults.Count < 20)
             {

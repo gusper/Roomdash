@@ -7,13 +7,13 @@ namespace Server.Controllers
 {
     public class PostsController : ApiController
     {
-        List<ProjectModel> _projectList;
+        List<TopicModel> _projectList;
 
         public PostsController()
         {
-            _projectList = new List<ProjectModel>()
+            _projectList = new List<TopicModel>()
             {
-                new ProjectModel() {
+                new TopicModel() {
                     Name = "F12 Dev Tools", UrlSlug = "f12",
                     TwitterQuery = @"f12 OR tools OR debugging IE10 OR IE11 OR ""IE 11"" OR ""Internet Explorer""",
                     GooglePlusQuery = @"Internet-Explorer OR IE9 OR IE10 OR IE11 dev tools OR F12 OR developer OR chrome-devtools",
@@ -21,7 +21,7 @@ namespace Server.Controllers
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"f12",
                 },
-                new ProjectModel() {
+                new TopicModel() {
                     Name = "Visual Studio", UrlSlug = "visualstudio",
                     TwitterQuery = @"""visual studio"" OR VS2012 OR VS2013",
                     GooglePlusQuery = @"""Visual Studio"" OR VS2012 OR VS2013",
@@ -29,7 +29,7 @@ namespace Server.Controllers
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"",
                 },
-                new ProjectModel() {
+                new TopicModel() {
                     Name = "Visual Studio 2015", UrlSlug = "dev14",
                     TwitterQuery = @"""visual studio"" OR vs AND 2015 ctp",
                     GooglePlusQuery = @"""visual studio"" OR vs AND 2015 ctp",
@@ -37,7 +37,7 @@ namespace Server.Controllers
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"",
                 },
-                new ProjectModel() {
+                new TopicModel() {
                     Name = "Chakra JavaScript Runtime", UrlSlug = "chakra",
                     TwitterQuery = @"javascript chakra OR v8 OR ""Internet Explorer"" OR IE10 OR IE11 OR carakan OR tamarin OR monkey OR nitro OR jsrt",
                     GooglePlusQuery = @"javascript chakra OR v8 OR Internet-Explorer OR IE10 OR IE11 OR carakan OR tamarin OR monkey OR nitro OR jsrt",
@@ -45,7 +45,7 @@ namespace Server.Controllers
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = "javascript",
                 },
-                new ProjectModel() {
+                new TopicModel() {
                     Name = "TypeScript", UrlSlug = "typescript",
                     TwitterQuery = @"typescript",
                     GooglePlusQuery = @"typescript",
@@ -53,7 +53,7 @@ namespace Server.Controllers
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"typescript",
                 },
-                new ProjectModel() {
+                new TopicModel() {
                     Name = "JavaScript Tools", UrlSlug = "jstools",
                     TwitterQuery = @"""Visual Studio"" javascript OR js",
                     GooglePlusQuery = @"Visual-Studio javascript OR js",
@@ -61,7 +61,7 @@ namespace Server.Controllers
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"javascript",
                 },
-                new ProjectModel() {
+                new TopicModel() {
                     Name = "Application Insights", UrlSlug = "appinsights",
                     TwitterQuery = @"""application insights"" OR ""app insights""",
                     GooglePlusQuery = @"""application insights"" OR ""app insights""",
@@ -69,7 +69,7 @@ namespace Server.Controllers
                     StackOverflowNotTagged = @"facebook",
                     StackOverflowInTitle = @"app insights",
                 },
-                new ProjectModel() {
+                new TopicModel() {
                     Name = "Visual Studio XAML Tools", UrlSlug = "xdt",
                     TwitterQuery = @"blend ""Visual Studio"" OR xaml OR microsoft OR unnir",
                     GooglePlusQuery = @"blend OR Visual-Studio OR microsoft OR unnir xaml",
@@ -77,7 +77,7 @@ namespace Server.Controllers
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"xaml",
                 },
-                new ProjectModel() {
+                new TopicModel() {
                     Name = "Visual Studio HTML Design Tools", UrlSlug = "hdt",
                     TwitterQuery = @"blend ""Visual Studio"" OR html OR microsoft",
                     GooglePlusQuery = @"expression-blend OR visual-studio html OR css",
@@ -85,7 +85,7 @@ namespace Server.Controllers
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"html",
                 },
-                new ProjectModel() {
+                new TopicModel() {
                     Name = "Fiddler", UrlSlug = "fiddler",
                     TwitterQuery = @"fiddler browser OR network OR IE OR Chrome OR web OR request OR Firefox OR port OR mono OR mac OR xamarin OR telerik",
                     GooglePlusQuery = @"fiddler browser OR network OR IE OR Chrome OR web OR request OR Firefox OR port OR mono OR mac OR xamarin OR linux OR telerik",

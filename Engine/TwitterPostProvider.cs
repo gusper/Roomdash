@@ -22,12 +22,12 @@ namespace Engine
             _twitterCtx = new TwitterContext(new SingleUserAuthorizer() { Credentials = credentials });
         }
 
-        public List<Post> GetPosts(ProjectModel requestedProject)
+        public List<Post> GetPosts(TopicModel requestedTopic)
         {
             var queryResults =
               from search in _twitterCtx.Search
               where search.Type == SearchType.Search &&
-                    search.Query == requestedProject.TwitterQuery + " exclude:retweets" &&
+                    search.Query == requestedTopic.TwitterQuery + " exclude:retweets" &&
                     search.Count == 50 &&
                     search.SearchLanguage == "en" &&
                     search.IncludeEntities == false &&

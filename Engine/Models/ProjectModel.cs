@@ -1,6 +1,6 @@
 ﻿namespace Engine.Models
 {
-    public class ProjectModel
+    public class TopicModel
     {
         public string Name { get; set; }
 

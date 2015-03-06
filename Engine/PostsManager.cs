@@ -7,9 +7,9 @@ namespace Engine
     public class PostsManager
     {
         private List<IPostProvider> _postProviders;
-        private List<ProjectModel> _projects;
+        private List<TopicModel> _projects;
 
-        public PostsManager(List<ProjectModel> projectList)
+        public PostsManager(List<TopicModel> projectList)
         {
             _projects = projectList;
         }
@@ -29,13 +29,13 @@ namespace Engine
             }
         }
 
-        public IEnumerable<Post> GetPosts(string requestedProjectName)
+        public IEnumerable<Post> GetPosts(string requestedTopic)
         {
             var posts = new List<Post>();
 
             Initialize();
 
-            var requestedProject = _projects.Find(p => p.UrlSlug.ToLower() == requestedProjectName.ToLower());
+            var requestedProject = _projects.Find(p => p.UrlSlug.ToLower() == requestedTopic.ToLower());
 
             foreach (var providerList in _postProviders)
                 posts.AddRange(providerList.GetPosts(requestedProject));

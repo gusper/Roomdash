@@ -12,10 +12,10 @@ namespace Engine
     {
         public void Connect() { }
 
-        public List<Post> GetPosts(ProjectModel requestedProject)
+        public List<Post> GetPosts(TopicModel requestedTopic)
         {
             List<Post> posts = new List<Post>();
-            var query = GetQueryTextForTopic(requestedProject);
+            var query = GetQueryTextForTopic(requestedTopic);
             var searchResults = getQueryResults(query);
             if (searchResults == null) return posts;
 
@@ -67,7 +67,7 @@ namespace Engine
             return posts;
         }
 
-        private string GetQueryTextForTopic(ProjectModel project)
+        private string GetQueryTextForTopic(TopicModel project)
         {
             string tagged = string.Empty;
             string intitle = string.Empty;

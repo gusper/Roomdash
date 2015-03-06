@@ -6,6 +6,6 @@ namespace Engine
     interface IPostProvider
     {
         void Connect();
-        List<Post> GetPosts(ProjectModel requestedProject);
+        List<Post> GetPosts(TopicModel requestedTopic);
     }
 }
