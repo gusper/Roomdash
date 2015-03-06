@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Engine.Models;
+﻿using Engine.Models;
 using LinqToTwitter;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Engine
 {
