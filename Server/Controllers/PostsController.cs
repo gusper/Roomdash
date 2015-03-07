@@ -89,7 +89,7 @@ namespace Server.Controllers
                     Name = "Fiddler", UrlSlug = "fiddler",
                     TwitterQuery = @"fiddler browser OR network OR IE OR Chrome OR web OR request OR Firefox OR port OR mono OR mac OR xamarin OR telerik",
                     GooglePlusQuery = @"fiddler browser OR network OR IE OR Chrome OR web OR request OR Firefox OR port OR mono OR mac OR xamarin OR linux OR telerik",
-                    StackOverflowTagged = @"",
+                    StackOverflowTagged = @"fiddler",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"fiddler",
                 },
