@@ -38,6 +38,14 @@ namespace Server.Controllers
                     StackOverflowInTitle = @"",
                 },
                 new TopicModel() {
+                    Name = "Build 2015", UrlSlug = "build2015",
+                    TwitterQuery = @"#build2015",
+                    GooglePlusQuery = @"build2015",
+                    StackOverflowTagged = @"",
+                    StackOverflowNotTagged = @"",
+                    StackOverflowInTitle = @"",
+                },
+                new TopicModel() {
                     Name = "Chakra JavaScript Runtime", UrlSlug = "chakra",
                     TwitterQuery = @"javascript chakra OR v8 OR ""Internet Explorer"" OR IE10 OR IE11 OR carakan OR tamarin OR monkey OR nitro OR jsrt",
                     GooglePlusQuery = @"javascript chakra OR v8 OR Internet-Explorer OR IE10 OR IE11 OR carakan OR tamarin OR monkey OR nitro OR jsrt",
