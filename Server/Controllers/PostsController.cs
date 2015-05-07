@@ -38,6 +38,14 @@ namespace Server.Controllers
                     StackOverflowInTitle = @"",
                 },
                 new TopicModel() {
+                    Name = "Visual Studio Code", UrlSlug = "vscode",
+                    TwitterQuery = @"""visual studio code"" OR ""vscode"" OR ""vs code""",
+                    GooglePlusQuery = @"visual-studio-code OR vscode OR vs-code",
+                    StackOverflowTagged = @"vscode",
+                    StackOverflowNotTagged = @"",
+                    StackOverflowInTitle = @"vscode",
+                },
+                new TopicModel() {
                     Name = "Build 2015", UrlSlug = "build2015",
                     TwitterQuery = @"#build2015",
                     GooglePlusQuery = @"build2015",
