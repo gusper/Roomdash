@@ -39,7 +39,7 @@ namespace Server.Controllers
                 },
                 new TopicModel() {
                     Name = "Visual Studio Code", UrlSlug = "vscode",
-                    TwitterQuery = @"""visual studio code"" OR ""vscode"" OR ""vs code""",
+                    TwitterQuery = @"""visual studio code"" OR ""vscode"" OR ""vs code"" OR @code",
                     GooglePlusQuery = @"visual-studio-code OR vscode OR vs-code",
                     StackOverflowTagged = @"vscode",
                     StackOverflowNotTagged = @"",
