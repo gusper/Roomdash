@@ -109,6 +109,14 @@ namespace Server.Controllers
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"fiddler",
                 },
+                new TopicModel() {
+                    Name = "Azure API Apps", UrlSlug = "apiapps",
+                    TwitterQuery = @"apiapps OR ""azure api app"" OR ""azure api apps""",
+                    GooglePlusQuery = @"azure api-app OR azure api-apps",
+                    StackOverflowTagged = @"azure-api-apps",
+                    StackOverflowNotTagged = @"",
+                    StackOverflowInTitle = @"azure api app",
+                },
             };
         }
 
