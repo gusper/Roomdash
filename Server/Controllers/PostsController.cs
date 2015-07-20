@@ -31,8 +31,8 @@ namespace Server.Controllers
                 },
                 new TopicModel() {
                     Name = "Visual Studio 2015", UrlSlug = "dev14",
-                    TwitterQuery = @"""visual studio"" OR vs AND 2015 ctp",
-                    GooglePlusQuery = @"""visual studio"" OR vs AND 2015 ctp",
+                    TwitterQuery = @"""visual studio"" AND 2015",
+                    GooglePlusQuery = @"""visual studio"" OR vs AND 2015",
                     StackOverflowTagged = @"visual-studio-2015",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"",
