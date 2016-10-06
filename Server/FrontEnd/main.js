@@ -30,6 +30,7 @@ function displayPageContent() {
     });
 
     displayStats();
+    displayRefreshTime();
 }
 
 function calculateStats() {
@@ -49,6 +50,10 @@ function displayStats() {
         $('<span>', { text: '50+ posts today!' }).appendTo($('#stats'));
     else
         $('<span>', { text: postsToday + ' posts today' }).appendTo($('#stats'));
+}
+
+function displayRefreshTime() {
+    $('<span>', { text: 'Last refreshed at ' + DateUtils.toShortTimeString(new Date()) }).appendTo($('#last-refresh'));
 }
 
 function getPostTimeText(datePosted) {
