@@ -8,7 +8,7 @@ namespace Server.Controllers
         {
             if (string.IsNullOrEmpty(projectId))
             {
-                Response.Redirect(@"/project/f12");
+                Response.Redirect(@"/project/vspreview");
             }
 
             ViewData["projectId"] = projectId;
