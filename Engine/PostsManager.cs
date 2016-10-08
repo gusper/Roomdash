@@ -21,6 +21,7 @@ namespace Engine
                 new TwitterPostProvider(),
                 new GooglePlusPostProvider(),
                 new StackOverflowPostProvider(),
+                new RedditPostProvider(),
             };
             
             foreach (var provider in _postProviders)

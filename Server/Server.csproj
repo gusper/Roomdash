@@ -267,6 +267,7 @@
     <None Include="Properties\PublishProfiles\roomdash.com - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\roomdash.com - Web Deploy.pubxml" />
     <Content Include="Images\googleplus.png" />
+    <Content Include="Images\reddit.png" />
     <Content Include="Images\stackoverflow.png" />
     <Content Include="Images\twitter.png" />
     <Content Include="FrontEnd\dateutils.js" />

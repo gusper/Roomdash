@@ -14,6 +14,16 @@ namespace Server.Controllers
             _projectList = new List<TopicModel>()
             {
                 new TopicModel() {
+                    Name = "Visual Studio Preview", UrlSlug = "vspreview",
+                    TwitterQuery = @"""visual studio"" preview",
+                    GooglePlusQuery = @"""Visual Studio"" AND preview",
+                    StackOverflowTagged = @"",
+                    StackOverflowNotTagged = @"",
+                    StackOverflowInTitle = @"visual studio preview",
+                    RedditQuery = @"visual studio preview",
+                    RedditSubreddits = new List<string>() { "/r/visualstudio", "/r/programming" }
+                },
+                new TopicModel() {
                     Name = "F12 Dev Tools", UrlSlug = "f12",
                     TwitterQuery = @"f12 OR tools OR debugging IE10 OR IE11 OR ""IE 11"" OR ""Internet Explorer""",
                     GooglePlusQuery = @"Internet-Explorer OR IE9 OR IE10 OR IE11 dev tools OR F12 OR developer OR chrome-devtools",
@@ -28,14 +38,6 @@ namespace Server.Controllers
                     StackOverflowTagged = @"visual-studio;visual-studio-2013;visual-studio-2012;visual-studio-2015",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"",
-                },
-                new TopicModel() {
-                    Name = "Visual Studio Preview", UrlSlug = "vspreview",
-                    TwitterQuery = @"""visual studio"" preview",
-                    GooglePlusQuery = @"""Visual Studio"" AND preview",
-                    StackOverflowTagged = @"",
-                    StackOverflowNotTagged = @"",
-                    StackOverflowInTitle = @"visual studio preview",
                 },
                 new TopicModel() {
                     Name = "Visual Studio 2015", UrlSlug = "dev14",

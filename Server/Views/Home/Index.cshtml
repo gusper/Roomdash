@@ -15,7 +15,11 @@
         <div class="identity">
             <div class="avatar">
                 <a href="${UrlToUserProfile}">
-                    <img src="${UrlToUserAvatar}" />
+                    {{if SourceService === 'reddit'}}
+                        <img src="${'/images/'+SourceService+'.png'}"/>
+                    {{else}}
+                        <img src="${UrlToUserAvatar}"/>
+                    {{/if}}
                 </a>
             </div>
             <div class="names">

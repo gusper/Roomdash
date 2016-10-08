@@ -1,4 +1,5 @@
 ﻿using Engine.Models;
+using Engine.Secrets;
 using RedditSharp;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,13 @@ namespace Engine
 
         public void Connect()
         {
+            _reddit = new Reddit();
             Authenticate();
         }
 
-        public List<Post> GetPosts(TopicModel requestedTopic)
+        public List<Post> GetPosts(TopicModel topic)
         {
-            //List<Post> fullResults = new List<Post>();
+            #region Old code
             //ActivitiesResource.SearchRequest searchRequest;
             //string pageToken = string.Empty;
 
@@ -46,47 +48,45 @@ namespace Engine
             //        break;
             //}
             //return fullResults;
-            return null;
-        }
 
-        private string ExtractRelevantContent()
-        {
-            //string content;
+            #endregion
 
-            //if (!string.IsNullOrWhiteSpace(activity.Title))
-            //{
-            //    content = activity.Title;
-            //}
-            //else if (activity.Object.Attachments.Count > 0)
-            //{
-            //    content = activity.Object.Attachments[0].Content;
-            //}
-            //else if (!string.IsNullOrWhiteSpace(activity.Object.Content))
-            //{
-            //    content = activity.Object.Content;
-            //}
-            //else
-            //{
-            //    content = "Unknown content.";
-            //}
+            var results = new List<Post>();
 
-            //if (content.Length > 100)
-            //{
-            //    content = content.Substring(0, 100) + "…";
-            //}
+            foreach (var subredditName in topic.RedditSubreddits)
+            {
+                var subreddit = _reddit.GetSubreddit(subredditName);
+                var subResults = subreddit.Search(topic.RedditQuery, Sorting.New, TimeSorting.Year).Take(10);
+                foreach (var post in subResults)
+                {
+                    string authorName = "Unknown";
 
-            //return content;
-            return String.Empty;
+                    try
+                    {
+                        if (post.Author != null)
+                        {
+                            authorName = post.Author.Name;
+                        }
+                    }
+                    catch {}
+
+                    results.Add(new Post()
+                    {
+                        SourceService = "reddit",
+                        Text = $@"{post.Title} ({subredditName.ToLower()})",
+                        Name = authorName,
+                        DateCreated = post.Created,
+                        UrlToPost = $@"http://reddit.com/{post.Permalink.OriginalString}",
+                    });
+                }
+            }
+
+            return results;
         }
 
         private void Authenticate()
         {
-            //// Create the service and authenticate using API key
-            //_plusService = new PlusService(new BaseClientService.Initializer()
-            //{
-            //    ApiKey = Secrets.ApiKeys.GooglePlusApiKey, 
-            //    ApplicationName = Secrets.ApiKeys.GooglePlusApplicationName
-            //});
+            _reddit.LogIn(ApiKeys.RedditUserName, ApiKeys.RedditPassword);
         }
     }
 }
