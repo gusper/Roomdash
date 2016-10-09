@@ -24,7 +24,7 @@ namespace Engine
             foreach (var subredditName in topic.RedditSubreddits)
             {
                 var subreddit = _reddit.GetSubreddit(subredditName);
-                var subResults = subreddit.Search(topic.RedditQuery, Sorting.New, TimeSorting.Year).Take(5);
+                var subResults = subreddit.Search(topic.RedditQuery, Sorting.New, TimeSorting.Year).Take(10);
 
                 foreach (var post in subResults)
                 {
