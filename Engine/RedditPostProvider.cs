@@ -31,7 +31,7 @@ namespace Engine
                     results.Add(new Post()
                     {
                         SourceService = "reddit",
-                        Text = $@"{post.Title} ({subredditName.ToLower()})",
+                        Text = post.Title,
                         Name = post.AuthorName,
                         UrlToUserProfile = $@"http://reddit.com/user/{post.AuthorName}",
                         DateCreated = post.Created,
