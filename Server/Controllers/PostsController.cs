@@ -30,6 +30,8 @@ namespace Server.Controllers
                     StackOverflowTagged = @"internet-explorer",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"f12",
+                    RedditQuery = @"",
+                    RedditSubreddits = new List<string>() { }
                 },
                 new TopicModel() {
                     Name = "Visual Studio", UrlSlug = "visualstudio",
@@ -59,6 +61,8 @@ namespace Server.Controllers
                     StackOverflowTagged = @"internet-explorer",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = "javascript",
+                    RedditQuery = @"",
+                    RedditSubreddits = new List<string>() { }
                 },
                 new TopicModel() {
                     Name = "TypeScript", UrlSlug = "typescript",
@@ -67,6 +71,8 @@ namespace Server.Controllers
                     StackOverflowTagged = @"typescript",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"typescript",
+                    RedditQuery = @"",
+                    RedditSubreddits = new List<string>() { }
                 },
                 new TopicModel() {
                     Name = "Application Insights", UrlSlug = "appinsights",
@@ -75,6 +81,8 @@ namespace Server.Controllers
                     StackOverflowTagged = @"",
                     StackOverflowNotTagged = @"facebook",
                     StackOverflowInTitle = @"app insights",
+                    RedditQuery = @"",
+                    RedditSubreddits = new List<string>() { }
                 },
                 new TopicModel() {
                     Name = "Fiddler", UrlSlug = "fiddler",
@@ -83,6 +91,8 @@ namespace Server.Controllers
                     StackOverflowTagged = @"fiddler",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"fiddler",
+                    RedditQuery = @"",
+                    RedditSubreddits = new List<string>() { }
                 },
                 new TopicModel() {
                     Name = "Azure API Apps", UrlSlug = "apiapps",
@@ -91,6 +101,8 @@ namespace Server.Controllers
                     StackOverflowTagged = @"azure-api-apps",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"azure api app",
+                    RedditQuery = @"",
+                    RedditSubreddits = new List<string>() { }
                 },
             };
         }
