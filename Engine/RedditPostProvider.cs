@@ -19,38 +19,6 @@ namespace Engine
 
         public List<Post> GetPosts(TopicModel topic)
         {
-            #region Old code
-            //ActivitiesResource.SearchRequest searchRequest;
-            //string pageToken = string.Empty;
-
-            //searchRequest = _plusService.Activities.Search(requestedTopic.GooglePlusQuery);
-
-            //while (fullResults.Count < 20)
-            //{
-            //    searchRequest.PageToken = pageToken;
-            //    var activityFeed = searchRequest.Execute();
-            //    pageToken = activityFeed.NextPageToken;
-
-            //    var pageOfResults = activityFeed.Items.Where(activity => activity.Title.Length > 0).Select(status => new Post()
-            //    {
-            //        SourceService = "googleplus",
-            //        ScreenName = status.Actor.DisplayName ?? string.Empty,
-            //        Name = status.Actor.DisplayName ?? string.Empty,
-            //        DateCreated = DateTime.Parse(status.Updated),
-            //        UrlToPost = status.Url,
-            //        UrlToUserProfile = status.Actor.Url,
-            //        Text = ExtractRelevantContent(status),
-            //        UrlToUserAvatar = status.Actor.Image.Url ?? string.Empty,
-            //    }).ToList();
-            //    fullResults.AddRange(pageOfResults);
-
-            //    if (string.IsNullOrEmpty(pageToken))
-            //        break;
-            //}
-            //return fullResults;
-
-            #endregion
-
             var results = new List<Post>();
 
             foreach (var subredditName in topic.RedditSubreddits)
