@@ -60,12 +60,13 @@ namespace Engine
                 foreach (var post in subResults)
                 {
                     string authorName = "Unknown";
+                    string authorUrl = String.Empty;
 
                     try
                     {
                         if (post.Author != null)
                         {
-                            authorName = post.Author.Name;
+                            authorName = post.Author.FullName;
                         }
                     }
                     catch {}
@@ -75,6 +76,7 @@ namespace Engine
                         SourceService = "reddit",
                         Text = $@"{post.Title} ({subredditName.ToLower()})",
                         Name = authorName,
+                        UrlToUserProfile = $@"http://reddit.com/user/{authorName}",
                         DateCreated = post.Created,
                         UrlToPost = $@"http://reddit.com/{post.Permalink.OriginalString}",
                     });
