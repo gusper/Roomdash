@@ -24,27 +24,16 @@ namespace Engine
             foreach (var subredditName in topic.RedditSubreddits)
             {
                 var subreddit = _reddit.GetSubreddit(subredditName);
-                var subResults = subreddit.Search(topic.RedditQuery, Sorting.New, TimeSorting.Year).Take(10);
+                var subResults = subreddit.Search(topic.RedditQuery, Sorting.New, TimeSorting.Year).Take(5);
+
                 foreach (var post in subResults)
                 {
-                    string authorName = "Unknown";
-                    string authorUrl = String.Empty;
-
-                    try
-                    {
-                        if (post.Author != null)
-                        {
-                            authorName = post.Author.FullName;
-                        }
-                    }
-                    catch {}
-
                     results.Add(new Post()
                     {
                         SourceService = "reddit",
                         Text = $@"{post.Title} ({subredditName.ToLower()})",
-                        Name = authorName,
-                        UrlToUserProfile = $@"http://reddit.com/user/{authorName}",
+                        Name = post.AuthorName,
+                        UrlToUserProfile = $@"http://reddit.com/user/{post.AuthorName}",
                         DateCreated = post.Created,
                         UrlToPost = $@"http://reddit.com/{post.Permalink.OriginalString}",
                     });
