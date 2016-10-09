@@ -38,14 +38,8 @@ namespace Server.Controllers
                     StackOverflowTagged = @"visual-studio;visual-studio-2013;visual-studio-2012;visual-studio-2015",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"",
-                },
-                new TopicModel() {
-                    Name = "Visual Studio 2015", UrlSlug = "dev14",
-                    TwitterQuery = @"""visual studio"" AND 2015",
-                    GooglePlusQuery = @"""visual studio"" OR vs AND 2015",
-                    StackOverflowTagged = @"visual-studio-2015",
-                    StackOverflowNotTagged = @"",
-                    StackOverflowInTitle = @"",
+                    RedditQuery = @"",
+                    RedditSubreddits = new List<string>() { "/r/visualstudio" }
                 },
                 new TopicModel() {
                     Name = "Visual Studio Code", UrlSlug = "vscode",
@@ -54,6 +48,9 @@ namespace Server.Controllers
                     StackOverflowTagged = @"vscode",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"vscode",
+                    RedditQuery = @"",
+                    RedditSubreddits = new List<string>() { "/r/vscode" }
+
                 },
                 new TopicModel() {
                     Name = "Chakra JavaScript Runtime", UrlSlug = "chakra",
