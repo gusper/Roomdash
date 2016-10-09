@@ -47,7 +47,7 @@ $(document).ready(function () {
 
 function displayStats() {
     if (postsToday >= 50)
-        $('<span>', { text: '50+ posts today!' }).appendTo($('#stats'));
+        $('<span>', { text: '50+ posts today' }).appendTo($('#stats'));
     else
         $('<span>', { text: postsToday + ' posts today' }).appendTo($('#stats'));
 }
