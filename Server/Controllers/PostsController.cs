@@ -35,9 +35,9 @@ namespace Server.Controllers
                 },
                 new TopicModel() {
                     Name = "Visual Studio", UrlSlug = "visualstudio",
-                    TwitterQuery = @"""visual studio"" OR VS2012 OR VS2013",
-                    GooglePlusQuery = @"""Visual Studio"" OR VS2012 OR VS2013",
-                    StackOverflowTagged = @"visual-studio;visual-studio-2013;visual-studio-2012;visual-studio-2015",
+                    TwitterQuery = @"""visual studio"" OR VS2015 OR VS2017",
+                    GooglePlusQuery = @"""Visual Studio"" OR VS2015 OR VS2017",
+                    StackOverflowTagged = @"visual-studio;visual-studio-2013;visual-studio-2015;visual-studio-2017",
                     StackOverflowNotTagged = @"",
                     StackOverflowInTitle = @"",
                     RedditQuery = @"",
