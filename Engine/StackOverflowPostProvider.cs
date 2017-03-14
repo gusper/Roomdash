@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -28,7 +29,8 @@ namespace Engine
 
                 var id = getSubtitle(status);
 
-                var p = new Post() {
+                var p = new Post()
+                {
                     ScreenName = (string)status["owner"]["display_name"],
                     Name = (string)status["owner"]["display_name"],
                     FollowersCount = (int)status["owner"]["reputation"],
@@ -90,15 +92,15 @@ namespace Engine
         // Creates the formatted reputation and badge display for SO posts. 
         public string getSubtitle(JToken status)
         {
-            var ID = status["owner"]["reputation"] + "/";
-            
+            var ID = (status["owner"]["reputation"] ?? "") + "/";
+
             try
             {
-                // SO doesn't always include the badges count, and doing LINQ null checks sucks. 
-                ID = ID 
-                + status["owner"]["badge_counts"]["bronze"] + "/"
-                + status["owner"]["badge_counts"]["silver"] + "/"
-                + status["owner"]["badge_counts"]["gold"];
+                // SO doesn't always include the badges count
+                ID = ID
+                    + status["owner"]["badge_counts"]["bronze"] + "/"
+                    + status["owner"]["badge_counts"]["silver"] + "/"
+                    + status["owner"]["badge_counts"]["gold"];
             }
             catch (Exception)
             {
@@ -108,17 +110,21 @@ namespace Engine
 
             var split = ID.Split('/');
             var rep = split[0];
-
-            // Reduce big numbers into xxx.xk.  Only a 1-2 char reduction, but follows SO format. 
-            if (int.Parse(rep) > 1000) rep = rep.Substring(0, rep.Length - 3) + "." + rep.Substring(rep.Length - 3, 1) + "k";
             var bronze = split[1];
             var silver = split[2];
             var gold = split[3];
+            
+            if (!string.IsNullOrWhiteSpace(rep))
+            {
+                // Reduce big numbers into xxx.xk.  Only a 1-2 char reduction, but follows SO format. 
+                if (int.Parse(rep) > 1000)
+                    rep = rep.Substring(0, rep.Length - 3) + "." + rep.Substring(rep.Length - 3, 1) + "k";
+            }
 
             // Hacky insertion of numbers to make spans into circles. 
             return @"(<b>" + rep + "</b>) " +
                 (gold.Equals("0") ? string.Empty : (@"<span class=""badge gold""></span>") + gold) +
-                (silver.Equals("0") ? string.Empty : (@"<span class=""badge silver""></span>") + silver) + 
+                (silver.Equals("0") ? string.Empty : (@"<span class=""badge silver""></span>") + silver) +
                 (bronze.Equals("0") ? string.Empty : (@"<span class=""badge bronze""></span>") + bronze);
         }
     }
