@@ -26,16 +26,31 @@ namespace Engine
                 var subreddit = _reddit.GetSubreddit(subredditName);
                 var subResults = subreddit.Search(topic.RedditQuery, Sorting.New, TimeSorting.Year).Take(10);
 
-                foreach (var post in subResults)
+                try
+                {
+                    foreach (var post in subResults)
+                    {
+                        results.Add(new Post()
+                        {
+                            SourceService = "reddit",
+                            Text = post.Title,
+                            Name = post.AuthorName,
+                            UrlToUserProfile = $@"http://reddit.com/user/{post.AuthorName}",
+                            DateCreated = post.Created,
+                            UrlToPost = $@"http://reddit.com/{post.Permalink.OriginalString}",
+                        });
+                    }
+                }
+                catch (System.Net.WebException)
                 {
                     results.Add(new Post()
                     {
                         SourceService = "reddit",
-                        Text = post.Title,
-                        Name = post.AuthorName,
-                        UrlToUserProfile = $@"http://reddit.com/user/{post.AuthorName}",
-                        DateCreated = post.Created,
-                        UrlToPost = $@"http://reddit.com/{post.Permalink.OriginalString}",
+                        Text = "Reddit API query failed.",
+                        Name = "Reddit",
+                        UrlToUserProfile = "",
+                        DateCreated = DateTime.Now,
+                        UrlToPost = "",
                     });
                 }
             }
