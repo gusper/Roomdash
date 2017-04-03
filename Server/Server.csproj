@@ -264,12 +264,15 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\Roomdash - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Roomdash - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\roomdash.com - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\roomdash.com - Web Deploy.pubxml" />
     <Content Include="Images\googleplus.png" />
     <Content Include="Images\reddit.png" />
     <Content Include="Images\reddit_avatar.png" />
     <Content Include="Images\stackoverflow.png" />
+    <Content Include="Images\twitter-small.png" />
     <Content Include="Images\twitter.png" />
     <Content Include="FrontEnd\dateutils.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
