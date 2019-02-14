@@ -103,7 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RedditPostProvider.cs" />
-    <Compile Include="GooglePlusPostProvider.cs" />
     <Compile Include="IPostProvider.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\TopicModel.cs" />

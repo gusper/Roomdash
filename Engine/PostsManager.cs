@@ -19,7 +19,6 @@ namespace Engine
             _postProviders = new List<IPostProvider>()
             {
                 new TwitterPostProvider(),
-                new GooglePlusPostProvider(),
                 new StackOverflowPostProvider(),
                 new RedditPostProvider(),
             };
