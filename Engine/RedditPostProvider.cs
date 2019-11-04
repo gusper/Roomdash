@@ -36,7 +36,7 @@ namespace Engine
                             Text = post.Title,
                             Name = post.AuthorName,
                             UrlToUserProfile = $@"http://reddit.com/user/{post.AuthorName}",
-                            DateCreated = post.Created,
+                            DateCreated = post.Created.UtcDateTime,
                             UrlToPost = $@"http://reddit.com/{post.Permalink.OriginalString}",
                         });
                     }
