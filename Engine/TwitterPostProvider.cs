@@ -1,6 +1,7 @@
 ﻿using Engine.Models;
 using LinqToTwitter;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Engine
@@ -34,7 +35,29 @@ namespace Engine
                     search.ResultType == ResultType.Recent
               select search;
 
-            Search searchResults = queryResults.Single();
+            Search searchResults = null;
+
+            try
+            {
+                searchResults = queryResults.Single();
+            }
+            catch (LinqToTwitter.TwitterQueryException)
+            {
+                Debug.WriteLine("error from LinqToTwitter");
+                return new List<Post>() {new Post()
+                {
+                    SourceService = "twitter",
+                    ScreenName = "",
+                    Name = "Twitter",
+                    //DateCreated = status.CreatedAt,
+                    //ID = status.StatusID,
+                    Text = "Failing to get data from Twitter.",
+                    UrlToUserProfile = "http://twitter.com/",
+                    UrlToPost = "http://twitter.com/",
+                    //UrlToUserAvatar = status.User.ProfileImageUrl,
+                    FollowersCount = 0,
+                } };
+            }
 
             return searchResults.Statuses.Select(status => new Post()
             {
