@@ -6,12 +6,13 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace Engine
 {
     public class StackOverflowPostProvider : IPostProvider
     {
-        public void Connect() { }
+        public async Task Connect() { }
 
         public List<Post> GetPosts(TopicModel requestedTopic)
         {

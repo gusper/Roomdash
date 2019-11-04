@@ -4,6 +4,7 @@ using RedditSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Engine
 {
@@ -11,7 +12,7 @@ namespace Engine
     {
         private Reddit _reddit;
 
-        public void Connect()
+        public async Task Connect()
         {
             _reddit = new Reddit();
             Authenticate();
@@ -23,36 +24,36 @@ namespace Engine
 
             foreach (var subredditName in topic.RedditSubreddits)
             {
-                var subreddit = _reddit.GetSubreddit(subredditName);
-                var subResults = subreddit.Search(topic.RedditQuery, Sorting.New, TimeSorting.Year).Take(10);
+                var subreddit = _reddit.GetSubredditAsync(subredditName);
+// TODO:                 var subResults = subreddit.Search(topic.RedditQuery, Sorting.New, TimeSorting.Year).Take(10);
 
-                try
-                {
-                    foreach (var post in subResults)
-                    {
-                        results.Add(new Post()
-                        {
-                            SourceService = "reddit",
-                            Text = post.Title,
-                            Name = post.AuthorName,
-                            UrlToUserProfile = $@"http://reddit.com/user/{post.AuthorName}",
-                            DateCreated = post.Created.UtcDateTime,
-                            UrlToPost = $@"http://reddit.com/{post.Permalink.OriginalString}",
-                        });
-                    }
-                }
-                catch (System.Net.WebException)
-                {
-                    results.Add(new Post()
-                    {
-                        SourceService = "reddit",
-                        Text = "Reddit API query failed.",
-                        Name = "Reddit",
-                        UrlToUserProfile = "",
-                        DateCreated = DateTime.Now,
-                        UrlToPost = "",
-                    });
-                }
+            //    try
+            //    {
+            //        foreach (var post in subResults)
+            //        {
+            //            results.Add(new Post()
+            //            {
+            //                SourceService = "reddit",
+            //                Text = post.Title,
+            //                Name = post.AuthorName,
+            //                UrlToUserProfile = $@"http://reddit.com/user/{post.AuthorName}",
+            //                DateCreated = post.Created.UtcDateTime,
+            //                UrlToPost = $@"http://reddit.com/{post.Permalink.OriginalString}",
+            //            });
+            //        }
+            //    }
+            //    catch (System.Net.WebException)
+            //    {
+            //        results.Add(new Post()
+            //        {
+            //            SourceService = "reddit",
+            //            Text = "Reddit API query failed.",
+            //            Name = "Reddit",
+            //            UrlToUserProfile = "",
+            //            DateCreated = DateTime.Now,
+            //            UrlToPost = "",
+            //        });
+            //    }
             }
 
             return results;
@@ -60,7 +61,7 @@ namespace Engine
 
         private void Authenticate()
         {
-            _reddit.LogIn(ApiKeys.RedditUserName, ApiKeys.RedditPassword);
+            //_reddit.LogIn(ApiKeys.RedditUserName, ApiKeys.RedditPassword);
         }
     }
 }

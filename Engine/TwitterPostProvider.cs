@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Engine
 {
@@ -11,17 +12,29 @@ namespace Engine
     {
         private TwitterContext _twitterCtx;
 
-        public void Connect()
+        public async Task Connect()
         {
+            //ICredentialStore credentialStore = new InMemoryCredentialStore()
+            //{
+            //    ConsumerKey = Secrets.ApiKeys.TwitterConsumerKey,
+            //    ConsumerSecret = Secrets.ApiKeys.TwitterConsumerSecret,
+            //    OAuthToken = Secrets.ApiKeys.TwitterAccesstoken,
+            //    OAuthTokenSecret = Secrets.ApiKeys.TwitterOAuthToken,
+            //};
+
+            //_twitterCtx = new TwitterContext(new SingleUserAuthorizer() { CredentialStore = credentialStore });
+
+
             ICredentialStore credentialStore = new InMemoryCredentialStore()
             {
                 ConsumerKey = Secrets.ApiKeys.TwitterConsumerKey,
-                ConsumerSecret = Secrets.ApiKeys.TwitterConsumerSecret,
-                OAuthToken = Secrets.ApiKeys.TwitterAccesstoken,
-                OAuthTokenSecret = Secrets.ApiKeys.TwitterOAuthToken,
+                ConsumerSecret = Secrets.ApiKeys.TwitterConsumerSecret + "broken"
             };
-            
-            _twitterCtx = new TwitterContext(new SingleUserAuthorizer() { CredentialStore = credentialStore });
+
+            IAuthorizer auth = new ApplicationOnlyAuthorizer() { CredentialStore = credentialStore };
+            await auth.AuthorizeAsync();
+
+            _twitterCtx = new TwitterContext(auth);
         }
 
         public List<Post> GetPosts(TopicModel requestedTopic)

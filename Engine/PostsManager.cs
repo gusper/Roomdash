@@ -1,6 +1,7 @@
 ﻿using Engine.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Engine
 {
@@ -14,7 +15,7 @@ namespace Engine
             _projects = projectList;
         }
 
-        private void Initialize()
+        private async Task Initialize()
         {
             _postProviders = new List<IPostProvider>()
             {
@@ -25,15 +26,15 @@ namespace Engine
             
             foreach (var provider in _postProviders)
             {
-                provider.Connect();
+                await provider.Connect();
             }
         }
 
-        public IEnumerable<Post> GetPosts(string requestedTopic)
+        public async IAsyncEnumerable<Post> GetPosts(string requestedTopic)
         {
             var posts = new List<Post>();
 
-            Initialize();
+            await Initialize();
 
             var requestedProject = _projects.Find(p => p.UrlSlug.ToLower() == requestedTopic.ToLower());
 
