@@ -109,10 +109,10 @@ namespace Server.Controllers
         }
 
         // GET api/posts/f12
-        public IEnumerable<Post> Get(string topic)
+        public async Task<IEnumerable<Post>> Get(string topic)
         {
             var pm = new PostsManager(_projectList);
-            return (IEnumerable<Post>)pm.GetPosts(topic);
+            return await pm.GetPosts(topic).ConfigureAwait(false);
         }
     }
 }
