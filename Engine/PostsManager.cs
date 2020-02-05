@@ -20,8 +20,8 @@ namespace Engine
             _postProviders = new List<IPostProvider>()
             {
                 new TwitterPostProvider(),
-                new StackOverflowPostProvider(),
-                new RedditPostProvider(),
+                //new StackOverflowPostProvider(),
+                //new RedditPostProvider(),
             };
             
             foreach (var provider in _postProviders)

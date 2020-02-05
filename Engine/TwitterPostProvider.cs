@@ -12,7 +12,7 @@ namespace Engine
     {
         private TwitterContext _twitterCtx;
 
-        public void Connect()
+        public async Task Connect()
         {
             var auth = new ApplicationOnlyAuthorizer
             {
@@ -23,7 +23,7 @@ namespace Engine
                 }
             };
 
-            auth.AuthorizeAsync();
+            await auth.AuthorizeAsync();
 
             _twitterCtx = new TwitterContext(auth);
         }
@@ -42,28 +42,21 @@ namespace Engine
 
             try
             {
-                //var srch = queryResults.SingleOrDefault();
+                var srch = queryResults.SingleOrDefault();
 
-                var srch = (from search in _twitterCtx.Search
-                            where search.Type == SearchType.Search &&
-                                  search.Query == "LINQ to Twitter"
-                            select search)
-            .SingleOrDefault(); 
-
-                return null;
-                //return srch.Statuses.Select(status => new Post()
-                //{
-                //    SourceService = "twitter",
-                //    ScreenName = status.User.ScreenName,
-                //    Name = status.User.Name,
-                //    DateCreated = status.CreatedAt,
-                //    ID = status.StatusID.ToString(),
-                //    Text = status.Text,
-                //    UrlToUserProfile = "http://twitter.com/" + status.User.ScreenName,
-                //    UrlToPost = "http://twitter.com/" + status.User.ScreenName + "/status/" + status.StatusID.ToString(),
-                //    UrlToUserAvatar = status.User.ProfileImageUrl,
-                //    FollowersCount = status.User.FollowersCount,
-                //}).ToList();
+                return srch.Statuses.Select(status => new Post()
+                {
+                    SourceService = "twitter",
+                    ScreenName = status.User.ScreenName,
+                    Name = status.User.Name,
+                    DateCreated = status.CreatedAt,
+                    ID = status.StatusID.ToString(),
+                    Text = status.Text,
+                    UrlToUserProfile = "http://twitter.com/" + status.User.ScreenName,
+                    UrlToPost = "http://twitter.com/" + status.User.ScreenName + "/status/" + status.StatusID.ToString(),
+                    UrlToUserAvatar = status.User.ProfileImageUrl,
+                    FollowersCount = status.User.FollowersCount,
+                }).ToList();
             }
             catch (LinqToTwitter.TwitterQueryException)
             {
