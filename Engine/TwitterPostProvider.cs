@@ -42,11 +42,16 @@ namespace Engine
 
             try
             {
-                var searchResults = queryResults.SingleOrDefault();
-                //var searchResults = queryResults.SingleOrDefaultAsync();
+                //var srch = queryResults.SingleOrDefault();
+
+                var srch = (from search in _twitterCtx.Search
+                            where search.Type == SearchType.Search &&
+                                  search.Query == "LINQ to Twitter"
+                            select search)
+            .SingleOrDefault(); 
 
                 return null;
-                //return searchResults.Statuses.Select(status => new Post()
+                //return srch.Statuses.Select(status => new Post()
                 //{
                 //    SourceService = "twitter",
                 //    ScreenName = status.User.ScreenName,
