@@ -1,4 +1,5 @@
 ﻿using Engine.Models;
+using Engine.Secrets;
 using LinqToTwitter;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,8 @@ namespace Engine
             {
                 CredentialStore = new InMemoryCredentialStore()
                 {
-                    ConsumerKey = "Uinoxnp2uSvqbJZBL8uQWg",
-                    ConsumerSecret = "OseNSrgX0B667EMZcMTELmZK94XLpc8LR9i3SJUyk"
+                    ConsumerKey = ApiKeys.TwitterConsumerKey,
+                    ConsumerSecret = ApiKeys.TwitterConsumerSecret
                 }
             };
 
@@ -28,7 +29,7 @@ namespace Engine
             _twitterCtx = new TwitterContext(auth);
         }
 
-        public List<Post> GetPosts(TopicModel requestedTopic)
+        public async Task<List<Post>> GetPosts(TopicModel requestedTopic)
         {
             var queryResults =
               from search in _twitterCtx.Search
@@ -42,7 +43,7 @@ namespace Engine
 
             try
             {
-                var srch = queryResults.SingleOrDefault();
+                var srch = await queryResults.SingleOrDefaultAsync();
 
                 return srch.Statuses.Select(status => new Post()
                 {

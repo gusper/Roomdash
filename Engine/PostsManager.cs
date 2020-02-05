@@ -1,4 +1,5 @@
 ﻿using Engine.Models;
+using LinqToTwitter;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace Engine
             }
         }
 
-        public IEnumerable<Post> GetPosts(string requestedTopic)
+        public async Task<IEnumerable<Post>> GetPosts(string requestedTopic)
         {
             var posts = new List<Post>();
 
@@ -39,7 +40,7 @@ namespace Engine
             var requestedProject = _projects.Find(p => p.UrlSlug.ToLower() == requestedTopic.ToLower());
 
             foreach (var providerList in _postProviders)
-                posts.AddRange(providerList.GetPosts(requestedProject));
+                posts.AddRange(await providerList.GetPosts(requestedProject));
 
             return from post in posts
                    orderby post.DateCreated descending

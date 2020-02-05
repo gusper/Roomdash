@@ -112,7 +112,7 @@ namespace Server.Controllers
         public IEnumerable<Post> Get(string topic)
         {
             var pm = new PostsManager(_projectList);
-            return pm.GetPosts(topic);
+            return (IEnumerable<Post>)pm.GetPosts(topic);
         }
     }
 }
