@@ -12,7 +12,7 @@ namespace Engine
     {
         private Reddit _reddit;
 
-        public async Task Connect()
+        public void Connect()
         {
             _reddit = new Reddit();
             Authenticate();

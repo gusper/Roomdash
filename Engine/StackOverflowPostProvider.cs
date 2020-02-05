@@ -12,7 +12,7 @@ namespace Engine
 {
     public class StackOverflowPostProvider : IPostProvider
     {
-        public async Task Connect() { }
+        public void Connect() { }
 
         public List<Post> GetPosts(TopicModel requestedTopic)
         {

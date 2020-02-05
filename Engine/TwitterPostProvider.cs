@@ -12,27 +12,18 @@ namespace Engine
     {
         private TwitterContext _twitterCtx;
 
-        public async Task Connect()
+        public void Connect()
         {
-            //ICredentialStore credentialStore = new InMemoryCredentialStore()
-            //{
-            //    ConsumerKey = Secrets.ApiKeys.TwitterConsumerKey,
-            //    ConsumerSecret = Secrets.ApiKeys.TwitterConsumerSecret,
-            //    OAuthToken = Secrets.ApiKeys.TwitterAccesstoken,
-            //    OAuthTokenSecret = Secrets.ApiKeys.TwitterOAuthToken,
-            //};
-
-            //_twitterCtx = new TwitterContext(new SingleUserAuthorizer() { CredentialStore = credentialStore });
-
-
-            ICredentialStore credentialStore = new InMemoryCredentialStore()
+            var auth = new ApplicationOnlyAuthorizer
             {
-                ConsumerKey = Secrets.ApiKeys.TwitterConsumerKey,
-                ConsumerSecret = Secrets.ApiKeys.TwitterConsumerSecret + "broken"
+                CredentialStore = new InMemoryCredentialStore()
+                {
+                    ConsumerKey = "Uinoxnp2uSvqbJZBL8uQWg",
+                    ConsumerSecret = "OseNSrgX0B667EMZcMTELmZK94XLpc8LR9i3SJUyk"
+                }
             };
 
-            IAuthorizer auth = new ApplicationOnlyAuthorizer() { CredentialStore = credentialStore };
-            await auth.AuthorizeAsync();
+            auth.AuthorizeAsync();
 
             _twitterCtx = new TwitterContext(auth);
         }
@@ -51,21 +42,23 @@ namespace Engine
 
             try
             {
-                Search searchResults = queryResults.Single();
+                var searchResults = queryResults.SingleOrDefault();
+                //var searchResults = queryResults.SingleOrDefaultAsync();
 
-                return searchResults.Statuses.Select(status => new Post()
-                {
-                    SourceService = "twitter",
-                    ScreenName = status.User.ScreenName,
-                    Name = status.User.Name,
-                    DateCreated = status.CreatedAt,
-                    ID = status.StatusID.ToString(),
-                    Text = status.Text,
-                    UrlToUserProfile = "http://twitter.com/" + status.User.ScreenName,
-                    UrlToPost = "http://twitter.com/" + status.User.ScreenName + "/status/" + status.StatusID.ToString(),
-                    UrlToUserAvatar = status.User.ProfileImageUrl,
-                    FollowersCount = status.User.FollowersCount,
-                }).ToList();
+                return null;
+                //return searchResults.Statuses.Select(status => new Post()
+                //{
+                //    SourceService = "twitter",
+                //    ScreenName = status.User.ScreenName,
+                //    Name = status.User.Name,
+                //    DateCreated = status.CreatedAt,
+                //    ID = status.StatusID.ToString(),
+                //    Text = status.Text,
+                //    UrlToUserProfile = "http://twitter.com/" + status.User.ScreenName,
+                //    UrlToPost = "http://twitter.com/" + status.User.ScreenName + "/status/" + status.StatusID.ToString(),
+                //    UrlToUserAvatar = status.User.ProfileImageUrl,
+                //    FollowersCount = status.User.FollowersCount,
+                //}).ToList();
             }
             catch (LinqToTwitter.TwitterQueryException)
             {

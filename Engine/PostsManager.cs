@@ -15,7 +15,7 @@ namespace Engine
             _projects = projectList;
         }
 
-        private async Task Initialize()
+        private void Initialize()
         {
             _postProviders = new List<IPostProvider>()
             {
@@ -26,15 +26,15 @@ namespace Engine
             
             foreach (var provider in _postProviders)
             {
-                await provider.Connect();
+                provider.Connect();
             }
         }
 
-        public async IAsyncEnumerable<Post> GetPosts(string requestedTopic)
+        public IEnumerable<Post> GetPosts(string requestedTopic)
         {
             var posts = new List<Post>();
 
-            await Initialize();
+            Initialize();
 
             var requestedProject = _projects.Find(p => p.UrlSlug.ToLower() == requestedTopic.ToLower());
 

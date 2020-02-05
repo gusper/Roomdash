@@ -109,7 +109,7 @@ namespace Server.Controllers
         }
 
         // GET api/posts/f12
-        public IAsyncEnumerable<Post> Get(string topic)
+        public IEnumerable<Post> Get(string topic)
         {
             var pm = new PostsManager(_projectList);
             return pm.GetPosts(topic);
