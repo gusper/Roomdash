@@ -22,7 +22,7 @@ namespace Engine
             {
                 new TwitterPostProvider(),
                 new StackOverflowPostProvider(),
-                //new RedditPostProvider(),
+                new RedditPostProvider(),
             };
             
             foreach (var provider in _postProviders)
