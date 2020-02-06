@@ -21,7 +21,7 @@ namespace Engine
             _postProviders = new List<IPostProvider>()
             {
                 new TwitterPostProvider(),
-                //new StackOverflowPostProvider(),
+                new StackOverflowPostProvider(),
                 //new RedditPostProvider(),
             };
             
