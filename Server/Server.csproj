@@ -261,6 +261,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\Roomdash - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Roomdash - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Roomdash - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\roomdash.com - Web Deploy %282%29.pubxml" />
     <Content Include="Images\googleplus.png" />
