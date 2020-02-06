@@ -112,7 +112,7 @@ namespace Server.Controllers
         public async Task<IEnumerable<Post>> Get(string topic)
         {
             var pm = new PostsManager(_projectList);
-            return await pm.GetPosts(topic).ConfigureAwait(false);
+            return await pm.GetPosts(topic); //.ConfigureAwait(false);
         }
     }
 }
