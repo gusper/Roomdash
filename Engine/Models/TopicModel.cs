@@ -11,9 +11,6 @@ namespace Engine.Models
         // Twitter
         public string TwitterQuery { get; set; }
 
-        // Google+
-        public string GooglePlusQuery { get; set; }
-
         // StackOverflow
         public string StackOverflowTagged { get; set; }
         public string StackOverflowNotTagged { get; set; }
