@@ -48,13 +48,13 @@ namespace Engine
                 return srch.Statuses.Select(status => new Post()
                 {
                     SourceService = "twitter",
-                    ScreenName = status.User.ScreenName,
+                    ScreenName = status.User.ScreenNameResponse,
                     Name = status.User.Name,
                     DateCreated = status.CreatedAt,
                     ID = status.StatusID.ToString(),
                     Text = status.Text,
-                    UrlToUserProfile = "http://twitter.com/" + status.User.ScreenName,
-                    UrlToPost = "http://twitter.com/" + status.User.ScreenName + "/status/" + status.StatusID.ToString(),
+                    UrlToUserProfile = "http://twitter.com/" + status.User.ScreenNameResponse,
+                    UrlToPost = "http://twitter.com/" + status.User.ScreenNameResponse + "/status/" + status.StatusID.ToString(),
                     UrlToUserAvatar = status.User.ProfileImageUrl,
                     FollowersCount = status.User.FollowersCount,
                 }).ToList();
