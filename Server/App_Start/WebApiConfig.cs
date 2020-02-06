@@ -9,6 +9,9 @@ namespace Server
     {
         public static void Register(HttpConfiguration config)
         {
+            // TODO: Find a more appropriate place to set this or do this in general
+            System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12;
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{topic}",
