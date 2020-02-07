@@ -26,7 +26,13 @@ namespace Engine
             foreach (var subredditName in topic.RedditSubreddits)
             {
                 var subreddit = await _reddit.GetSubredditAsync(subredditName);
-                var subResults = subreddit.Search(topic.RedditQuery, Sorting.New, TimeSorting.Year).Take(10);
+
+                IEnumerable<RedditSharp.Things.Post> subResults;
+
+                if (string.IsNullOrEmpty(topic.RedditQuery))
+                    subResults = subreddit.Posts.Take(10);
+                else
+                    subResults = subreddit.Search(topic.RedditQuery, Sorting.New).Take(10);
 
                 try
                 {
