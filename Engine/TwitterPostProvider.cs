@@ -48,7 +48,7 @@ namespace Engine
                 return srch.Statuses.Select(status => new Post()
                 {
                     SourceService = "twitter",
-                    ScreenName = status.User.ScreenNameResponse,
+                    ScreenName = status.User.ScreenNameResponse.ToLower(),
                     Name = status.User.Name,
                     DateCreated = status.CreatedAt,
                     ID = status.StatusID.ToString(),
