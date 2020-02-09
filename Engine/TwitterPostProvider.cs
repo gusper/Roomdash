@@ -13,7 +13,7 @@ namespace Engine
     {
         private TwitterContext _twitterCtx;
 
-        public async Task Connect()
+        public async Task ConnectAsync()
         {
             var auth = new ApplicationOnlyAuthorizer
             {
@@ -29,7 +29,7 @@ namespace Engine
             _twitterCtx = new TwitterContext(auth);
         }
 
-        public async Task<List<Post>> GetPosts(TopicModel requestedTopic)
+        public async Task<List<Post>> GetPostsAsync(TopicModel requestedTopic)
         {
             var queryResults =
               from search in _twitterCtx.Search

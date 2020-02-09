@@ -12,9 +12,9 @@ namespace Engine
 {
     public class StackOverflowPostProvider : IPostProvider
     {
-        public Task Connect() { return Task.FromResult(1); }
+        public Task ConnectAsync() { return Task.FromResult(1); }
 
-        public Task<List<Post>> GetPosts(TopicModel requestedTopic)
+        public Task<List<Post>> GetPostsAsync(TopicModel requestedTopic)
         {
             List<Post> posts = new List<Post>();
             var query = GetQueryTextForTopic(requestedTopic);

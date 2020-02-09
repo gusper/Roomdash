@@ -6,7 +6,7 @@ namespace Engine
 {
     interface IPostProvider
     {
-        Task Connect();
-        Task<List<Post>> GetPosts(TopicModel requestedTopic);
+        Task ConnectAsync();
+        Task<List<Post>> GetPostsAsync(TopicModel requestedTopic);
     }
 }

@@ -12,14 +12,14 @@ namespace Engine
     {
         private Reddit _reddit;
 
-        public Task Connect()
+        public Task ConnectAsync()
         {
             _reddit = new Reddit();
             Authenticate();
             return Task.FromResult(1);
         }
 
-        public async Task<List<Post>> GetPosts(TopicModel topic)
+        public async Task<List<Post>> GetPostsAsync(TopicModel topic)
         {
             var results = new List<Post>();
 
